@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+ mysql:
+   image: docker.io/library/mysql:8.0.31 # latest in 2022 November
+   ports:
+      - "${MYSQL_PORT}:3306"
+    environment:
+      MYSQL_DATABASE: "stts"
+      MYSQL_USER: "mhs"
+      MYSQL_PASSWORD: "botak!@#"
+      MYSQL_ROOT_PASSWORD: "s1q2l3#"
+    volumes:
+      - ./data:/var/lib/mysql:Z # Owner user is 999, so podman unshare chown 999:999 *

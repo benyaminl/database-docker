@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+
+  postgresql:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_DB: stts
+      POSTGRES_PASSWORD: "sql!@#qwerty"
+    volumes:
+      - ./data:/var/lib/postgresql/data:Z # podman unshare chown 999:999, for some reason, it's same as mysql

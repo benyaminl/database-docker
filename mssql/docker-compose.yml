@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  sqlserver:
+    build: 
+      context: .
+      dockerfile: sqlserver.Dockerfile # @see https://docs.docker.com/compose/compose-file/compose-file-v3/#context
+    ports:
+      - "${MSSQL_PORT}:1433"
+    environment:
+      SA_PASSWORD: "12345!@Local"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - ./data:/var/opt/mssql:Z # owner of the folder should be 10001:0 / mssql:root, so podman unshare chown 10001:0 for rootless
+
+
